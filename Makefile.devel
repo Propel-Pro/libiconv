@@ -117,9 +117,9 @@ include/iconv.h.build.in : include/iconv.h.in include/export.h
 
 
 lib/aliases.h lib/canonical.h lib/canonical_local.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
-	$(CC) $(CFLAGS) lib/genaliases.c -o genaliases
-	./genaliases lib/aliases.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
+	$(CC) $(CFLAGS) lib/genaliases.c -o genaliases1
+	./genaliases1 lib/aliases.gperf canonical.sh canonical_local.sh
+	$(RM) genaliases1
 	$(GPERF) -m 10 lib/aliases.gperf > tmp.h
 	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases.h
 	sh canonical.sh > lib/canonical.h
@@ -127,9 +127,9 @@ lib/aliases.h lib/canonical.h lib/canonical_local.h : lib/encodings.def lib/enco
 	$(RM) tmp.h canonical.sh canonical_local.sh
 
 lib/aliases_sysaix.h lib/canonical_sysaix.h lib/canonical_local_sysaix.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_AIX_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/aliases_sysaix.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_AIX_ALIASES lib/genaliases.c -o genaliases2
+	./genaliases2 lib/aliases_sysaix.gperf canonical.sh canonical_local.sh
+	$(RM) genaliases2
 	$(GPERF) -m 10 lib/aliases_sysaix.gperf > tmp.h
 	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_sysaix.h
 	sh canonical.sh > lib/canonical_sysaix.h
@@ -137,9 +137,9 @@ lib/aliases_sysaix.h lib/canonical_sysaix.h lib/canonical_local_sysaix.h : lib/e
 	$(RM) tmp.h canonical.sh canonical_local.sh
 
 lib/aliases_syshpux.h lib/canonical_syshpux.h lib/canonical_local_syshpux.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_HPUX_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/aliases_syshpux.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_HPUX_ALIASES lib/genaliases.c -o genaliases3
+	./genaliases3 lib/aliases_syshpux.gperf canonical.sh canonical_local.sh
+	$(RM) genaliases3
 	$(GPERF) -m 10 lib/aliases_syshpux.gperf > tmp.h
 	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_syshpux.h
 	sh canonical.sh > lib/canonical_syshpux.h
@@ -147,9 +147,9 @@ lib/aliases_syshpux.h lib/canonical_syshpux.h lib/canonical_local_syshpux.h : li
 	$(RM) tmp.h canonical.sh canonical_local.sh
 
 lib/aliases_sysosf1.h lib/canonical_sysosf1.h lib/canonical_local_sysosf1.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_OSF1_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/aliases_sysosf1.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_OSF1_ALIASES lib/genaliases.c -o genaliases4
+	./genaliases4 lib/aliases_sysosf1.gperf canonical.sh canonical_local.sh
+	$(RM) genaliases4
 	$(GPERF) -m 10 lib/aliases_sysosf1.gperf > tmp.h
 	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_sysosf1.h
 	sh canonical.sh > lib/canonical_sysosf1.h
@@ -157,9 +157,9 @@ lib/aliases_sysosf1.h lib/canonical_sysosf1.h lib/canonical_local_sysosf1.h : li
 	$(RM) tmp.h canonical.sh canonical_local.sh
 
 lib/aliases_syssolaris.h lib/canonical_syssolaris.h lib/canonical_local_syssolaris.h : lib/encodings.def lib/encodings_local.def lib/genaliases.c
-	$(CC) $(CFLAGS) -DUSE_SOLARIS_ALIASES lib/genaliases.c -o genaliases
-	./genaliases lib/aliases_syssolaris.gperf canonical.sh canonical_local.sh
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_SOLARIS_ALIASES lib/genaliases.c -o genaliases5
+	./genaliases5 lib/aliases_syssolaris.gperf canonical.sh canonical_local.sh
+	$(RM) genaliases5
 	$(GPERF) -m 10 lib/aliases_syssolaris.gperf > tmp.h
 	sed -e 's/^\(const struct alias \)/static \1/' < tmp.h > lib/aliases_syssolaris.h
 	sh canonical.sh > lib/canonical_syssolaris.h
@@ -167,39 +167,39 @@ lib/aliases_syssolaris.h lib/canonical_syssolaris.h lib/canonical_local_syssolar
 	$(RM) tmp.h canonical.sh canonical_local.sh
 
 lib/aliases_aix.h lib/canonical_aix.h : lib/encodings_aix.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_AIX lib/genaliases2.c -o genaliases
-	./genaliases aix lib/aliases_aix.h lib/canonical_aix.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_AIX lib/genaliases2.c -o genaliases6
+	./genaliases6 aix lib/aliases_aix.h lib/canonical_aix.h
+	$(RM) genaliases6
 
 lib/aliases_aix_sysaix.h lib/canonical_aix_sysaix.h : lib/encodings_aix.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_AIX -DUSE_AIX_ALIASES lib/genaliases2.c -o genaliases
-	./genaliases aix lib/aliases_aix_sysaix.h lib/canonical_aix_sysaix.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_AIX -DUSE_AIX_ALIASES lib/genaliases2.c -o genaliases7
+	./genaliases7 aix lib/aliases_aix_sysaix.h lib/canonical_aix_sysaix.h
+	$(RM) genaliases7
 
 lib/aliases_osf1.h lib/canonical_osf1.h : lib/encodings_osf1.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_OSF1 lib/genaliases2.c -o genaliases
-	./genaliases osf1 lib/aliases_osf1.h lib/canonical_osf1.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_OSF1 lib/genaliases2.c -o genaliases8
+	./genaliases8 osf1 lib/aliases_osf1.h lib/canonical_osf1.h
+	$(RM) genaliases8
 
 lib/aliases_osf1_sysosf1.h lib/canonical_osf1_sysosf1.h : lib/encodings_osf1.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_OSF1 -DUSE_OSF1_ALIASES lib/genaliases2.c -o genaliases
-	./genaliases osf1 lib/aliases_osf1_sysosf1.h lib/canonical_osf1_sysosf1.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_OSF1 -DUSE_OSF1_ALIASES lib/genaliases2.c -o genaliases9
+	./genaliases9 osf1 lib/aliases_osf1_sysosf1.h lib/canonical_osf1_sysosf1.h
+	$(RM) genaliases9
 
 lib/aliases_dos.h lib/canonical_dos.h : lib/encodings_dos.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_DOS lib/genaliases2.c -o genaliases
-	./genaliases dos lib/aliases_dos.h lib/canonical_dos.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_DOS lib/genaliases2.c -o genaliases10
+	./genaliases10 dos lib/aliases_dos.h lib/canonical_dos.h
+	$(RM) genaliases10
 
 lib/aliases_zos.h lib/canonical_zos.h : lib/encodings_zos.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_ZOS lib/genaliases2.c -o genaliases
-	./genaliases zos lib/aliases_zos.h lib/canonical_zos.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_ZOS lib/genaliases2.c -o genaliases11
+	./genaliases11 zos lib/aliases_zos.h lib/canonical_zos.h
+	$(RM) genaliases11
 
 lib/aliases_extra.h lib/canonical_extra.h : lib/encodings_extra.def lib/genaliases2.c
-	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases
-	./genaliases extra lib/aliases_extra.h lib/canonical_extra.h
-	$(RM) genaliases
+	$(CC) $(CFLAGS) -DUSE_EXTRA lib/genaliases2.c -o genaliases12
+	./genaliases12 extra lib/aliases_extra.h lib/canonical_extra.h
+	$(RM) genaliases12
 
 
 lib/flags.h : lib/encodings.def lib/encodings_aix.def lib/encodings_osf1.def lib/encodings_dos.def lib/encodings_zos.def lib/encodings_extra.def lib/converters.h lib/genflags.c
